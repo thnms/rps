@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>종이</title>
+    <style>
+        body {
+            background-color: cornflowerblue;
+            overflow: hidden;
+        }
+
+        #choices-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 50vh;
+            left: 50vw;
+            transform: translate(-50%, -50%);
+
+            transition: top 1s ease-in-out,
+                          left 1s ease-in-out;
+            @starting-style {
+                top: -100vh;
+                left: -100vw;
+                transform: none;
+            }
+        }
+
+        #choices-viewer {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 50vh;
+            left: 50vw;
+            transform: translate(-50%, -50%);
+        }
+
+        .choices {
+            width: 100px;
+            height: 100px;
+            transition: 
+                width 1s ease-in-out,
+                height 1s ease-in-out;
+
+            @starting-style {
+                width: 0px;
+                height: 0px;
+            }
+            image-rendering: pixelated;
+  
+            /* Firefox */
+            image-rendering: crisp-edges;
+            image-rendering: -moz-crisp-edges; /* Legacy */
+
+            border: none;
+            background-color: transparent;
+            padding: 0;
+            cursor: pointer;
+        }
+
+        .choices.disappear {
+            animation-name: choice-disappear;
+            animation-duration: 1s;
+            animation-fill-mode: forwards;
+        }
+
+        .choices.winner {
+            animation-name: choice-winner;
+            animation-duration: 1s;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes choice-disappear {
+            from {
+                opacity: 1;
+                display: inline;
+            }
+
+            to {
+                opacity: 0;
+                display: none;
+            }
+        }
+
+        @keyframes choice-winner {
+            from {
+                width: 100px;
+                height: 100px;
+            }
+
+            to {
+                width: 200px;
+                height: 200px;
+            }
+        }
+
+        .choices img {
+            object-fit: contain;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="choices-container">
+        <!-- data-choice 상수 -->
+        <!-- paper = 3 -->
+        <!-- rock = 2 -->
+        <!-- scissors = 1 -->
+        <button class="choices" data-choice="paper">
+            <img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACkAAAA0CAYAAAAXKBGzAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAELSURBVGhD7ZJBDsMgDMD6/2/xsO7EhBwgJSRspbXkwyYSLNHjeHnZg3OBU3BZlGa46PRmJlLE/VukiOLvlNK0bpFclOGFFrmbET1EULkogtHIZkzrfw/CIvl0fMIePDsSWR4WUeVvhlnlbgbVEIE1GVnCCM3McGRlUER6Y45cyf6R/IauaMEUyYsjdI0cgSE9M0WgGvk9uJq7RaoMB/L5al7BHMnLPCXhkT14tjVnjozgFpEt9o/kd+TtcyKjuEUkMUfyaagnYZEeTke24EUzZtwjI9g7kk/TUoPnazPhkRaJOVKDF/fUCIv0ZO9IPpm3z4lcydLI4jLVxpyKWPQDVThg9QqcGZl92ZMPU6aIlLQz84sAAAAASUVORK5CYII=" />
+        </button>
+        <button class="choices" data-choice="rock">
+            <img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAuCAYAAABEbmvDAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAGHaVRYdFhNTDpjb20uYWRvYmUueG1wAAAAAAA8P3hwYWNrZXQgYmVnaW49J++7vycgaWQ9J1c1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCc/Pg0KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyI+PHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj48cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0idXVpZDpmYWY1YmRkNS1iYTNkLTExZGEtYWQzMS1kMzNkNzUxODJmMWIiIHhtbG5zOnRpZmY9Imh0dHA6Ly9ucy5hZG9iZS5jb20vdGlmZi8xLjAvIj48dGlmZjpPcmllbnRhdGlvbj4xPC90aWZmOk9yaWVudGF0aW9uPjwvcmRmOkRlc2NyaXB0aW9uPjwvcmRmOlJERj48L3g6eG1wbWV0YT4NCjw/eHBhY2tldCBlbmQ9J3cnPz4slJgLAAABR0lEQVRYR+2XUW7EIAxEpz0b90Lci7ulPyGiYwM2sGk/eFKkDTHwdgBlFzgcDofD4XA4/CVf3LDARfdLYy91vmEhZmqOqU43QijGCABIKfEj9zzuDj2hmlU5VzFLaUIMCZrnMxfePGIWqcJMesOCiimpglfumxs+hffLuMW8E9RQX3GIaqxi6iAhBG7ahkVsq5Q1cYvYQxk0hICcM3LOXLKNkZg4ibNJeWmJXa0lBPDRpAqamBB6Oy00xB5ijGKzvpEWFDGxpwpvpgXltdAVW0lLeSUV2AFQGi9sluoIFdgBUJZSMLuEKSVVStm34rBhJFakvGlZhHhVGI5RXUoPLNUbq6plj35iXialVFSx1v6wwss2g4jwZum3/aje8j9ATYxZTbBm1zjlZd69Yoy/Ptf3g6uJGmOD7kATdOfuPjQyEt4xx//hBy/ylM7Jd+DYAAAAAElFTkSuQmCC" />
+        </button>
+        <button class="choices" data-choice="scissors">
+            <img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACkAAAA0CAYAAAAXKBGzAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEmSURBVGhD7Y9RCoQwDAW9/6V3v4QwTFrRdCNsBwr2JfrG49hsNpvNZsAnOa+AUjztUOiU4r0Nk+OsFRPMntvIBHkfYT9aCj88uxMKLpHlB2d3QrGfS84Ks7llj2BR9kzuvneLWBZL4oxk79hzGSxkblnMmXFeBotixrsJZfdSKMCyO9kSWGon22W+jFhACRZbblk5I0nCfLRbCktmopGre49hCSWvnKVYEQVmZxksimXZnWcpLGMpc9tZBgvPUgpwh/MlsIylvMeMeTmUykott6wUSo0Ks7llZVAsK+IO9ywrYVR6wp1s37ISskLOuMd3OC/FPkwp7lzNyqCIHWIz3kuhkAkQm1vWiglZ1ooJWdaKCVnWiglZ1sopZOc1UOyVkpvNX/AFqr+gbgbeqUEAAAAASUVORK5CYII=" />
+        </button>
+    </div>
+    <div id="choices-viewer" hidden>
+
+    </div>
+    <script>
+        const choiceConstants = { "paper": 3, "rock": 2, "scissors": 1 };
+        const choicesContainer = document.getElementById("choices-container");
+        const choicesViewer = document.getElementById("choices-viewer");
+        
+        /** @type {HTMLElement[]} */
+        const choices = [];
+
+        function getChoiceNumber(element) {
+            return choiceConstants[element.dataset.choice] ?? element.dataset.choice;
+        }
+
+        function loadChoices() {
+            console.log("선택지 로딩 중");
+
+            let nonsortedChoices = Array.from(document.getElementsByClassName("choices"));
+            nonsortedChoices.sort((a, b) => getChoiceNumber(a) - getChoiceNumber(b));
+            choices.push(...nonsortedChoices);
+
+            choices.forEach((e) => {
+                e.addEventListener('click', _ => {
+                    handleChoice(e);
+                });
+            }); // 클릭 핸들러 등록
+        }
+
+        // const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+        /** @param {HTMLElement} choiceElement */
+        async function handleChoice(choiceElement) {
+            let myChoiceElement = choices[Math.floor(Math.random() * choices.length)];
+            let myChoice = getChoiceNumber(myChoiceElement);
+
+            let userChoiceElement = choiceElement;
+            let userChoice = getChoiceNumber(userChoiceElement);
+
+            let visibleChoices = choices.length;
+
+            choices.forEach(ele => {
+                ele.classList.add("disappear");
+                ele.addEventListener("animationend", (ev) => {
+                    choicesViewer.appendChild(userChoiceElement);
+                    choicesViewer.appendChild(myChoiceElement);
+                    choicesContainer.hidden = true;
+
+                    setTimeout(() => {
+                        visibleChoices -= 1;
+                        if (visibleChoices <= 0) {
+                            choicesViewer.hidden = false;
+                            myChoiceElement.classList.remove("disappear");
+                            userChoiceElement.classList.remove("disappear")
+
+                            let winner = getWinner(userChoice, myChoice);
+                            if (winner > 0) {
+                                userChoiceElement.classList.add("winner");
+                            } else if (winner < 0) {
+                                myChoiceElement.classList.add("winner");
+                            } // 비겼을 때는 아무것도 하지 않음
+                        }
+                    }, 500);
+                    
+                }, { once: true });
+            });
+
+            console.log(getWinner(userChoice, myChoice));
+        }
+
+        /**
+         * choice1이 이기면 1를 반환하고, choice2가 이기면 -1를 반환합니다.
+         * 비기면 0을 반환합니다.
+        */
+        function getWinner(choice1, choice2) {
+            if (choice1 == choice2) return 0;
+            let diff = choice2 - choice1;
+            let a = diff % 2 == 0;
+            if (diff < 0) a = !a;
+            return a ? 1 : -1;
+        }
+
+        loadChoices();
+    </script>
+</body>
+</html>
