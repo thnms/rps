@@ -137,8 +137,6 @@
         }
 
         function loadChoices() {
-            console.log("선택지 로딩 중");
-
             let nonsortedChoices = Array.from(document.getElementsByClassName("choices"));
             nonsortedChoices.sort((a, b) => getChoiceNumber(a) - getChoiceNumber(b));
             choices.push(...nonsortedChoices);
@@ -169,20 +167,19 @@
                 choicesViewer.appendChild(userChoiceElement);
                 choicesViewer.appendChild(myChoiceElement);
                 choicesContainer.hidden = true;
-                setTimeout(() => {
-                    choicesViewer.hidden = false;
-                    myChoiceElement.classList.remove("disappear");
-                    userChoiceElement.classList.remove("disappear")
 
-                    let winner = getWinner(userChoice, myChoice);
-                    if (winner > 0) {
-                        userChoiceElement.classList.add("winner");
-                    } else if (winner < 0) {
-                        myChoiceElement.classList.add("winner");
-                    } // 비겼을 때는 아무것도 하지 않음
+                choicesViewer.hidden = false;
+                myChoiceElement.classList.remove("disappear");
+                userChoiceElement.classList.remove("disappear");
 
-                    document.addEventListener("click", (evt) => location.reload(), { once: true });
-                }, 500);
+                let winner = getWinner(userChoice, myChoice);
+                if (winner > 0) {
+                    userChoiceElement.classList.add("winner");
+                } else if (winner < 0) {
+                    myChoiceElement.classList.add("winner");
+                } // 비겼을 때는 아무것도 하지 않음
+
+                document.addEventListener("click", (evt) => location.reload(), { once: true });
             });
         }
 
