@@ -165,26 +165,21 @@
             let userChoiceElement = choiceElement;
             let userChoice = getChoiceNumber(userChoiceElement);
 
-            let visibleChoices = choices.length;
-
             Promise.all(choices.map(e => getAnimationEndPromise(e))).then(d => {
                 choicesViewer.appendChild(userChoiceElement);
                 choicesViewer.appendChild(myChoiceElement);
                 choicesContainer.hidden = true;
                 setTimeout(() => {
-                    visibleChoices -= 1;
-                    if (visibleChoices <= 0) {
-                        choicesViewer.hidden = false;
-                        myChoiceElement.classList.remove("disappear");
-                        userChoiceElement.classList.remove("disappear")
-    
-                        let winner = getWinner(userChoice, myChoice);
-                        if (winner > 0) {
-                            userChoiceElement.classList.add("winner");
-                        } else if (winner < 0) {
-                            myChoiceElement.classList.add("winner");
-                        } // 비겼을 때는 아무것도 하지 않음
-                    }
+                    choicesViewer.hidden = false;
+                    myChoiceElement.classList.remove("disappear");
+                    userChoiceElement.classList.remove("disappear")
+
+                    let winner = getWinner(userChoice, myChoice);
+                    if (winner > 0) {
+                        userChoiceElement.classList.add("winner");
+                    } else if (winner < 0) {
+                        myChoiceElement.classList.add("winner");
+                    } // 비겼을 때는 아무것도 하지 않음
                 }, 500);
             });
         }
