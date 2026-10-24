@@ -150,7 +150,12 @@
             }); // 클릭 핸들러 등록
         }
 
-        // const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+        /** @param {HTMLElement} ele */
+        function getAnimationEndPromise(ele) {
+            return new Promise((resolve, reject) => {
+                ele.addEventListener("animationend", (evt) => resolve(), { once: true });
+            });
+        }
 
         /** @param {HTMLElement} choiceElement */
         async function handleChoice(choiceElement) {
@@ -162,33 +167,26 @@
 
             let visibleChoices = choices.length;
 
-            choices.forEach(ele => {
-                ele.classList.add("disappear");
-                ele.addEventListener("animationend", (ev) => {
-                    choicesViewer.appendChild(userChoiceElement);
-                    choicesViewer.appendChild(myChoiceElement);
-                    choicesContainer.hidden = true;
-
-                    setTimeout(() => {
-                        visibleChoices -= 1;
-                        if (visibleChoices <= 0) {
-                            choicesViewer.hidden = false;
-                            myChoiceElement.classList.remove("disappear");
-                            userChoiceElement.classList.remove("disappear")
-
-                            let winner = getWinner(userChoice, myChoice);
-                            if (winner > 0) {
-                                userChoiceElement.classList.add("winner");
-                            } else if (winner < 0) {
-                                myChoiceElement.classList.add("winner");
-                            } // 비겼을 때는 아무것도 하지 않음
-                        }
-                    }, 500);
-                    
-                }, { once: true });
+            Promise.all(choices.map(e => getAnimationEndPromise(e))).then(d => {
+                choicesViewer.appendChild(userChoiceElement);
+                choicesViewer.appendChild(myChoiceElement);
+                choicesContainer.hidden = true;
+                setTimeout(() => {
+                    visibleChoices -= 1;
+                    if (visibleChoices <= 0) {
+                        choicesViewer.hidden = false;
+                        myChoiceElement.classList.remove("disappear");
+                        userChoiceElement.classList.remove("disappear")
+    
+                        let winner = getWinner(userChoice, myChoice);
+                        if (winner > 0) {
+                            userChoiceElement.classList.add("winner");
+                        } else if (winner < 0) {
+                            myChoiceElement.classList.add("winner");
+                        } // 비겼을 때는 아무것도 하지 않음
+                    }
+                }, 500);
             });
-
-            console.log(getWinner(userChoice, myChoice));
         }
 
         /**
