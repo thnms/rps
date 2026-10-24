@@ -180,14 +180,12 @@
                     } else if (winner < 0) {
                         myChoiceElement.classList.add("winner");
                     } // 비겼을 때는 아무것도 하지 않음
+
+                    document.addEventListener("click", (evt) => location.reload(), { once: true });
                 }, 500);
             });
         }
 
-        /**
-         * choice1이 이기면 1를 반환하고, choice2가 이기면 -1를 반환합니다.
-         * 비기면 0을 반환합니다.
-        */
         function getWinner(choice1, choice2) {
             if (choice1 == choice2) return 0;
             let diff = choice2 - choice1;
