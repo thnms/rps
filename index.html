@@ -181,6 +181,7 @@
 
                 document.addEventListener("click", (evt) => location.reload(), { once: true });
             });
+            choices.forEach(ele => ele.classList.add("disappear"))
         }
 
         function getWinner(choice1, choice2) {
