@@ -163,7 +163,7 @@
             let userChoiceElement = choiceElement;
             let userChoice = getChoiceNumber(userChoiceElement);
 
-            Promise.all(choices.map(e => getAnimationEndPromise(e))).then(d => {
+            Promise.all(choices.map(e => getAnimationEndPromise(e))).then(() => {
                 choicesViewer.appendChild(userChoiceElement);
                 choicesViewer.appendChild(myChoiceElement);
                 choicesContainer.hidden = true;
