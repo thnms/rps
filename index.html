@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>종이</title>
     <style>
         body {
             background-color: cornflowerblue;
@@ -22,7 +23,7 @@
             transition: top 1s ease-in-out,
                           left 1s ease-in-out;
             @starting-style {
-                top: -100vh;
+                top: 50vh;
                 left: -100vw;
                 transform: none;
             }
@@ -106,23 +107,26 @@
     </style>
 </head>
 <body>
-    <div id="choices-container">
-        <!-- data-choice 상수 -->
-        <!-- paper = 3 -->
-        <!-- rock = 2 -->
-        <!-- scissors = 1 -->
-        <button class="choices" data-choice="paper">
-            <img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACkAAAA0CAYAAAAXKBGzAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAELSURBVGhD7ZJBDsMgDMD6/2/xsO7EhBwgJSRspbXkwyYSLNHjeHnZg3OBU3BZlGa46PRmJlLE/VukiOLvlNK0bpFclOGFFrmbET1EULkogtHIZkzrfw/CIvl0fMIePDsSWR4WUeVvhlnlbgbVEIE1GVnCCM3McGRlUER6Y45cyf6R/IauaMEUyYsjdI0cgSE9M0WgGvk9uJq7RaoMB/L5al7BHMnLPCXhkT14tjVnjozgFpEt9o/kd+TtcyKjuEUkMUfyaagnYZEeTke24EUzZtwjI9g7kk/TUoPnazPhkRaJOVKDF/fUCIv0ZO9IPpm3z4lcydLI4jLVxpyKWPQDVThg9QqcGZl92ZMPU6aIlLQz84sAAAAASUVORK5CYII=" />
-        </button>
-        <button class="choices" data-choice="rock">
-            <img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAuCAYAAABEbmvDAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAGHaVRYdFhNTDpjb20uYWRvYmUueG1wAAAAAAA8P3hwYWNrZXQgYmVnaW49J++7vycgaWQ9J1c1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCc/Pg0KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyI+PHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj48cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0idXVpZDpmYWY1YmRkNS1iYTNkLTExZGEtYWQzMS1kMzNkNzUxODJmMWIiIHhtbG5zOnRpZmY9Imh0dHA6Ly9ucy5hZG9iZS5jb20vdGlmZi8xLjAvIj48dGlmZjpPcmllbnRhdGlvbj4xPC90aWZmOk9yaWVudGF0aW9uPjwvcmRmOkRlc2NyaXB0aW9uPjwvcmRmOlJERj48L3g6eG1wbWV0YT4NCjw/eHBhY2tldCBlbmQ9J3cnPz4slJgLAAABR0lEQVRYR+2XUW7EIAxEpz0b90Lci7ulPyGiYwM2sGk/eFKkDTHwdgBlFzgcDofD4XA4/CVf3LDARfdLYy91vmEhZmqOqU43QijGCABIKfEj9zzuDj2hmlU5VzFLaUIMCZrnMxfePGIWqcJMesOCiimpglfumxs+hffLuMW8E9RQX3GIaqxi6iAhBG7ahkVsq5Q1cYvYQxk0hICcM3LOXLKNkZg4ibNJeWmJXa0lBPDRpAqamBB6Oy00xB5ijGKzvpEWFDGxpwpvpgXltdAVW0lLeSUV2AFQGi9sluoIFdgBUJZSMLuEKSVVStm34rBhJFakvGlZhHhVGI5RXUoPLNUbq6plj35iXialVFSx1v6wwss2g4jwZum3/aje8j9ATYxZTbBm1zjlZd69Yoy/Ptf3g6uJGmOD7kATdOfuPjQyEt4xx//hBy/ylM7Jd+DYAAAAAElFTkSuQmCC" />
-        </button>
-        <button class="choices" data-choice="scissors">
-            <img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACkAAAA0CAYAAAAXKBGzAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEmSURBVGhD7Y9RCoQwDAW9/6V3v4QwTFrRdCNsBwr2JfrG49hsNpvNZsAnOa+AUjztUOiU4r0Nk+OsFRPMntvIBHkfYT9aCj88uxMKLpHlB2d3QrGfS84Ks7llj2BR9kzuvneLWBZL4oxk79hzGSxkblnMmXFeBotixrsJZfdSKMCyO9kSWGon22W+jFhACRZbblk5I0nCfLRbCktmopGre49hCSWvnKVYEQVmZxksimXZnWcpLGMpc9tZBgvPUgpwh/MlsIylvMeMeTmUykott6wUSo0Ks7llZVAsK+IO9ywrYVR6wp1s37ISskLOuMd3OC/FPkwp7lzNyqCIHWIz3kuhkAkQm1vWiglZ1ooJWdaKCVnWiglZ1sopZOc1UOyVkpvNX/AFqr+gbgbeqUEAAAAASUVORK5CYII=" />
-        </button>
-    </div>
-    <div id="choices-viewer" hidden>
+    <div class="app">
+        <div id="choices-container">
+            <!-- data-choice 상수 -->
+            <!-- paper = 3 -->
+            <!-- rock = 2 -->
+            <!-- scissors = 1 -->
+            <button class="choices" data-choice="paper">
+                <img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACkAAAA0CAYAAAAXKBGzAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAELSURBVGhD7ZJBDsMgDMD6/2/xsO7EhBwgJSRspbXkwyYSLNHjeHnZg3OBU3BZlGa46PRmJlLE/VukiOLvlNK0bpFclOGFFrmbET1EULkogtHIZkzrfw/CIvl0fMIePDsSWR4WUeVvhlnlbgbVEIE1GVnCCM3McGRlUER6Y45cyf6R/IauaMEUyYsjdI0cgSE9M0WgGvk9uJq7RaoMB/L5al7BHMnLPCXhkT14tjVnjozgFpEt9o/kd+TtcyKjuEUkMUfyaagnYZEeTke24EUzZtwjI9g7kk/TUoPnazPhkRaJOVKDF/fUCIv0ZO9IPpm3z4lcydLI4jLVxpyKWPQDVThg9QqcGZl92ZMPU6aIlLQz84sAAAAASUVORK5CYII=" />
+            </button>
+            <button class="choices" data-choice="rock">
+                <img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAuCAYAAABEbmvDAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAGHaVRYdFhNTDpjb20uYWRvYmUueG1wAAAAAAA8P3hwYWNrZXQgYmVnaW49J++7vycgaWQ9J1c1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCc/Pg0KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyI+PHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj48cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0idXVpZDpmYWY1YmRkNS1iYTNkLTExZGEtYWQzMS1kMzNkNzUxODJmMWIiIHhtbG5zOnRpZmY9Imh0dHA6Ly9ucy5hZG9iZS5jb20vdGlmZi8xLjAvIj48dGlmZjpPcmllbnRhdGlvbj4xPC90aWZmOk9yaWVudGF0aW9uPjwvcmRmOkRlc2NyaXB0aW9uPjwvcmRmOlJERj48L3g6eG1wbWV0YT4NCjw/eHBhY2tldCBlbmQ9J3cnPz4slJgLAAABR0lEQVRYR+2XUW7EIAxEpz0b90Lci7ulPyGiYwM2sGk/eFKkDTHwdgBlFzgcDofD4XA4/CVf3LDARfdLYy91vmEhZmqOqU43QijGCABIKfEj9zzuDj2hmlU5VzFLaUIMCZrnMxfePGIWqcJMesOCiimpglfumxs+hffLuMW8E9RQX3GIaqxi6iAhBG7ahkVsq5Q1cYvYQxk0hICcM3LOXLKNkZg4ibNJeWmJXa0lBPDRpAqamBB6Oy00xB5ijGKzvpEWFDGxpwpvpgXltdAVW0lLeSUV2AFQGi9sluoIFdgBUJZSMLuEKSVVStm34rBhJFakvGlZhHhVGI5RXUoPLNUbq6plj35iXialVFSx1v6wwss2g4jwZum3/aje8j9ATYxZTbBm1zjlZd69Yoy/Ptf3g6uJGmOD7kATdOfuPjQyEt4xx//hBy/ylM7Jd+DYAAAAAElFTkSuQmCC" />
+            </button>
+            <button class="choices" data-choice="scissors">
+                <img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACkAAAA0CAYAAAAXKBGzAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEmSURBVGhD7Y9RCoQwDAW9/6V3v4QwTFrRdCNsBwr2JfrG49hsNpvNZsAnOa+AUjztUOiU4r0Nk+OsFRPMntvIBHkfYT9aCj88uxMKLpHlB2d3QrGfS84Ks7llj2BR9kzuvneLWBZL4oxk79hzGSxkblnMmXFeBotixrsJZfdSKMCyO9kSWGon22W+jFhACRZbblk5I0nCfLRbCktmopGre49hCSWvnKVYEQVmZxksimXZnWcpLGMpc9tZBgvPUgpwh/MlsIylvMeMeTmUykott6wUSo0Ks7llZVAsK+IO9ywrYVR6wp1s37ISskLOuMd3OC/FPkwp7lzNyqCIHWIz3kuhkAkQm1vWiglZ1ooJWdaKCVnWiglZ1sopZOc1UOyVkpvNX/AFqr+gbgbeqUEAAAAASUVORK5CYII=" />
+            </button>
+            
+        </div>
+        <div id="choices-viewer" hidden>
 
+        </div>
     </div>
     <script>
         const choiceConstants = { "paper": 3, "rock": 2, "scissors": 1 };
@@ -144,33 +148,30 @@
             choices.forEach((e) => {
                 e.addEventListener('click', _ => {
                     handleChoice(e);
-                });
+                }, { once: true });
             }); // 클릭 핸들러 등록
         }
 
-        /** @param {HTMLElement} ele */
-        function getAnimationEndPromise(ele) {
-            return new Promise((resolve, reject) => {
-                ele.addEventListener("animationend", (evt) => resolve(), { once: true });
+        function getAnimationEndPromise(element) {
+            return new Promise((resolve) => {
+                element.addEventListener('animationend', () => {
+                resolve();
+                }, { once: true });
             });
         }
 
         /** @param {HTMLElement} choiceElement */
-        async function handleChoice(choiceElement) {
+        function handleChoice(choiceElement) {
             let myChoiceElement = choices[Math.floor(Math.random() * choices.length)];
             let myChoice = getChoiceNumber(myChoiceElement);
 
             let userChoiceElement = choiceElement;
             let userChoice = getChoiceNumber(userChoiceElement);
 
-            Promise.all(choices.map(e => getAnimationEndPromise(e))).then(() => {
+            Promise.all(choices.map(v => getAnimationEndPromise(v))).then(() => {
                 choicesViewer.appendChild(userChoiceElement);
                 choicesViewer.appendChild(myChoiceElement);
                 choicesContainer.hidden = true;
-
-                choicesViewer.hidden = false;
-                myChoiceElement.classList.remove("disappear");
-                userChoiceElement.classList.remove("disappear");
 
                 let winner = getWinner(userChoice, myChoice);
                 if (winner > 0) {
@@ -179,9 +180,19 @@
                     myChoiceElement.classList.add("winner");
                 } // 비겼을 때는 아무것도 하지 않음
 
-                document.addEventListener("click", (evt) => location.reload(), { once: true });
+                setTimeout(() => {
+                    choicesViewer.hidden = false;
+                    myChoiceElement.classList.remove("disappear");
+                    userChoiceElement.classList.remove("disappear");
+
+                    document.addEventListener("click", (ev) => {
+                        location.reload();
+                    }, { once: true });
+                }, 500);
             });
-            choices.forEach(ele => ele.classList.add("disappear"))
+            choices.forEach(ele => ele.classList.add("disappear"));
+
+            console.log(getWinner(userChoice, myChoice));
         }
 
         function getWinner(choice1, choice2) {
@@ -191,6 +202,14 @@
             if (diff < 0) a = !a;
             return a ? 1 : -1;
         }
+
+        // function getWinnerAlt(choice1, choice2) { // 작동하는지는 모름
+        //     // r p s 순이여야 함
+        //     if (choice1 == choice2) return 0;
+        //     let w1 = choice1 % 4;
+        //     let w2 = choice2 % 4;
+        //     return w1 > w2 ? 1 : -1;
+        // }
 
         loadChoices();
     </script>
