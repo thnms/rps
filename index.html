@@ -208,7 +208,7 @@
             if (choice1 == choice2) return 0;
             let w1 = choice1 % 4;
             let w2 = choice2 % 4;
-            return w1 > w2 ? 1 : -1;
+            return w1 < w2 ? 1 : -1;
         }
 
         loadChoices();
