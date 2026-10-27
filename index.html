@@ -129,7 +129,7 @@
         </div>
     </div>
     <script>
-        const choiceConstants = { "paper": 3, "rock": 2, "scissors": 1 };
+        const choiceConstants = { "paper": 2, "rock": 1, "scissors": 3 };
         const choicesContainer = document.getElementById("choices-container");
         const choicesViewer = document.getElementById("choices-viewer");
         
@@ -195,21 +195,21 @@
             console.log(getWinner(userChoice, myChoice));
         }
 
-        function getWinner(choice1, choice2) {
-            if (choice1 == choice2) return 0;
-            let diff = choice2 - choice1;
-            let a = diff % 2 == 0;
-            if (diff < 0) a = !a;
-            return a ? 1 : -1;
-        }
-
-        // function getWinnerAlt(choice1, choice2) { // 작동하는지는 모름
-        //     // r p s 순이여야 함
+        // function getWinner(choice1, choice2) {
         //     if (choice1 == choice2) return 0;
-        //     let w1 = choice1 % 4;
-        //     let w2 = choice2 % 4;
-        //     return w1 > w2 ? 1 : -1;
+        //     let diff = choice2 - choice1;
+        //     let a = diff % 2 == 0;
+        //     if (diff < 0) a = !a;
+        //     return a ? 1 : -1;
         // }
+
+        function getWinner(choice1, choice2) { // 작동하는지는 모름
+            // r p s 순이여야 함
+            if (choice1 == choice2) return 0;
+            let w1 = choice1 % 4;
+            let w2 = choice2 % 4;
+            return w1 > w2 ? 1 : -1;
+        }
 
         loadChoices();
     </script>
